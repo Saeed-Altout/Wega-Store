@@ -5,8 +5,15 @@ import { db } from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   try {
-    const { title, description, price, category, imageUrl } =
-      await request.json();
+    const {
+      title,
+      description,
+      price,
+      category,
+      imageUrl,
+      isFeatured,
+      isArchived,
+    } = await request.json();
     const { isAuthenticated } = await auth();
 
     if (!isAuthenticated) {
@@ -36,6 +43,8 @@ export async function POST(request: NextRequest) {
         description,
         price,
         imageUrl,
+        isArchived,
+        isFeatured,
       },
     });
 
@@ -48,15 +57,13 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const { isAuthenticated } = await auth();
+    const products = await db.product.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-    if (!isAuthenticated) {
-      return new NextResponse("Unauthorized", { status: 401 });
-    }
-
-    const products = await db.product.findMany();
-
-    return new NextResponse(JSON.stringify(products), { status: 201 });
+    return new NextResponse(JSON.stringify(products), { status: 200 });
   } catch (error) {
     console.log("ERROR GET PRODUCTS ROUTE", error);
     return new NextResponse("Internal Server Error", { status: 500 });

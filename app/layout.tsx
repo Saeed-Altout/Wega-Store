@@ -4,6 +4,8 @@ import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import { QueryProvider } from "@/providers/query-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,7 +25,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn("antialiased", poppins.className)}>{children}</body>
+        <body className={cn(poppins.className, "antialiased")}>
+          <QueryProvider>
+            {children}
+            <Toaster />
+          </QueryProvider>
+        </body>
       </html>
     </ClerkProvider>
   );

@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { QueryProvider } from "@/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,7 +28,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={cn(poppins.className, "antialiased")}>
           <QueryProvider>
-            {children}
+            <NuqsAdapter>{children}</NuqsAdapter>
             <Toaster />
           </QueryProvider>
         </body>

@@ -58,7 +58,7 @@ export function Navbar() {
         </Button>
 
         <Sheet>
-          <SheetTrigger>
+          <SheetTrigger asChild>
             <Button size="icon" variant="ghost" className="flex md:hidden">
               <MenuIcon />
             </Button>

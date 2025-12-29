@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
@@ -18,9 +19,11 @@ export function HeroSection() {
               Nike designs that combine athletic performance with modern street
               style — on and off the track.
             </p>
-            <Button size="lg" className="rounded-full px-8">
-              <ArrowRightIcon />
-              Shope Now
+            <Button size="lg" className="rounded-full px-8" asChild>
+              <Link href="/products">
+                <ArrowRightIcon />
+                Shope Now
+              </Link>
             </Button>
           </div>
           <div className="h-full flex items-center justify-center">

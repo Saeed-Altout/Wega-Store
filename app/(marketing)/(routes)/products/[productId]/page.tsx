@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { useEffect } from "react";
 import { useParams } from "next/navigation";
 
 import {
@@ -17,7 +18,16 @@ import { useGetProductQuery } from "@/services/products/queries";
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();
-  const { data: product, isLoading } = useGetProductQuery(params.productId);
+  const {
+    data: product,
+    isLoading,
+    refetch,
+  } = useGetProductQuery(params.productId);
+
+  useEffect(() => {
+    refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params.productId]);
 
   if (isLoading) {
     return (
@@ -35,7 +45,7 @@ export default function ProductPage() {
             <Image
               src={product.imageUrl}
               alt={`product-${product.title}`}
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              className="absolute inset-0 h-full w-full object-cover"
               fill
             />
           </div>

@@ -10,17 +10,12 @@ export function Footer() {
     <footer className="border-t">
       <Container>
         <div className="py-6 flex items-center justify-between">
-          <p className="text-center text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground">
             © {new Date().getFullYear()} Wega Store. All rights reserved.
           </p>
 
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              asChild
-              size="icon"
-              className="hidden sm:flex"
-            >
+            <Button variant="outline" asChild size="icon">
               <Link
                 href="https://github.com/Saeed-Altout/Wega-Store"
                 rel="noopener noreferrer"

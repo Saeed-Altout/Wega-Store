@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
-import { ShoppingCartIcon } from "lucide-react";
+import { ShoppingCartIcon, TrashIcon } from "lucide-react";
 
 import { useCart } from "@/hooks/use-cart";
 
@@ -42,26 +42,37 @@ export function PreviewSheet() {
       title="My Cart"
       description="Product details"
     >
-      {cart.items.map((item) => (
-        <Item key={item.id} variant="muted">
-          <ItemMedia variant="image">
-            <Image
-              src={item.imageUrl}
-              alt={item.title}
-              width={80}
-              height={80}
-            />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>{item.title}</ItemTitle>
-          </ItemContent>
-          <ItemActions>
-            <Currency value={+item.price} />
-          </ItemActions>
-        </Item>
-      ))}
+      <div className="space-y-4 h-[72vh] overflow-y-auto w-full px-4 py-2">
+        {cart.items.map((item) => (
+          <Item key={item.id} variant="muted">
+            <ItemMedia variant="image">
+              <Image
+                src={item.imageUrl}
+                alt={item.title}
+                width={80}
+                height={80}
+              />
+            </ItemMedia>
+            <ItemContent>
+              <ItemTitle>{item.title}</ItemTitle>
+            </ItemContent>
+            <ItemActions>
+              <Currency value={+item.price} />
+              <Button
+                variant="destructive"
+                onClick={() => cart.removeItem(item.id)}
+                size="icon-sm"
+                className="ml-2"
+              >
+                <TrashIcon />
+                <span className="sr-only">Remove</span>
+              </Button>
+            </ItemActions>
+          </Item>
+        ))}
+      </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 px-4">
         <span className="text-xl flex items-center gap-2">
           Subtotal: <Currency value={subtotal} />{" "}
         </span>

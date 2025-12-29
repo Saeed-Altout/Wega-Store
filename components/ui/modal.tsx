@@ -47,9 +47,7 @@ export function Modal({
             <SheetTitle>{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
-          <div className="space-y-4 h-[88vh] overflow-y-auto w-full px-4">
-            {children}
-          </div>
+          {children}
         </SheetContent>
       </Sheet>
     );

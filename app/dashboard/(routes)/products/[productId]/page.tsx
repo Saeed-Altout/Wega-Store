@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 import {
   Item,
@@ -8,17 +10,21 @@ import {
 } from "@/components/ui/item";
 import { Badge } from "@/components/ui/badge";
 import { Currency } from "@/components/ui/currency";
+import { Spinner } from "@/components/ui/spinner";
 
-import { Product } from "@/lib/generated/client";
-import { getProduct } from "@/services/products/api";
+import { useGetProductQuery } from "@/services/products/queries";
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ productId: string }>;
-}) {
-  const productId = (await params).productId;
-  const product: Product = await getProduct(productId);
+export default function ProductPage() {
+  const params = useParams<{ productId: string }>();
+  const { data: product, isLoading } = useGetProductQuery(params.productId);
+
+  if (isLoading) {
+    return (
+      <div className="h-[600px] flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className="px-4 md:px-6">

@@ -8,6 +8,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getProducts } from "@/services/products/api";
+import { PreviewSheet } from "@/components/sheets/preview-sheet";
 
 export default async function MarketingLayout({
   children,
@@ -26,6 +27,8 @@ export default async function MarketingLayout({
       <Navbar />
       <main className="min-h-screen">{children}</main>
       <Footer />
+
+      <PreviewSheet />
     </HydrationBoundary>
   );
 }

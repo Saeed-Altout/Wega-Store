@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MenuIcon, ShoppingCartIcon, StoreIcon } from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useCart } from "@/hooks/use-cart";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -24,6 +26,7 @@ import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const isMobile = useIsMobile();
+  const cart = useCart();
 
   return (
     <Container className="flex items-center justify-between">
@@ -53,8 +56,8 @@ export function Navbar() {
       </NavigationMenu>
 
       <div className="flex justify-end gap-4">
-        <Button className="rounded-full">
-          <ShoppingCartIcon /> {0}
+        <Button className="rounded-full" onClick={() => cart.onOpen()}>
+          <ShoppingCartIcon /> {cart.items.length}
         </Button>
 
         <Sheet>

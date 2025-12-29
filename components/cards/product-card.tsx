@@ -3,7 +3,7 @@
 import ImageNext from "next/image";
 import { MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
-import { ExpandIcon, ShoppingCartIcon } from "lucide-react";
+import { ShoppingCartIcon } from "lucide-react";
 
 import {
   Card,
@@ -14,21 +14,22 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Currency } from "@/components/ui/currency";
+
 import { Product } from "@/lib/generated/client";
+import { useCart } from "@/hooks/use-cart";
 
 export function ProductCard({ product }: { product: Product }) {
   const router = useRouter();
+
+  const cart = useCart();
 
   const handleClick = () => {
     router.push(`/products/${product?.id}`);
   };
 
-  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-  };
-
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
+    cart.addItem(product);
   };
 
   return (
@@ -42,10 +43,6 @@ export function ProductCard({ product }: { product: Product }) {
         />
         <div className="absolute bottom-5 w-full opacity-0 transition group-hover:opacity-100">
           <div className="flex justify-center gap-x-6">
-            <Button onClick={onPreview} size="icon" variant="secondary">
-              <ExpandIcon />
-              <span className="sr-only">Preview</span>
-            </Button>
             <Button onClick={onAddToCart} size="icon" variant="secondary">
               <ShoppingCartIcon />
               <span className="sr-only">Add to cart</span>

@@ -41,7 +41,7 @@ export function ProductCard({ product }: { product: Product }) {
           alt={`product-${product.title}`}
           className="aspect-square rounded-xl object-cover"
         />
-        <div className="absolute bottom-5 w-full opacity-0 transition group-hover:opacity-100">
+        <div className="absolute bottom-5 w-full opacity-0 md:opacity-100 transition group-hover:opacity-100">
           <div className="flex justify-center gap-x-6">
             <Button onClick={onAddToCart} size="icon" variant="secondary">
               <ShoppingCartIcon />

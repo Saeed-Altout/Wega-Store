@@ -42,7 +42,7 @@ export default function ProductPage() {
   }
 
   return (
-    <section className="pt-10">
+    <section className="py-10">
       <Container>
         <div className="grid min-h-[600px] lg:grid-cols-2 gap-y-6">
           <div className="bg-muted relative rounded-xl overflow-hidden min-h-[400px]">

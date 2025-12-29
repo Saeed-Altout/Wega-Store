@@ -13,11 +13,15 @@ import { Badge } from "@/components/ui/badge";
 import { Currency } from "@/components/ui/currency";
 import { Spinner } from "@/components/ui/spinner";
 import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
 
 import { useGetProductQuery } from "@/services/products/queries";
+import { useCart } from "@/hooks/use-cart";
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();
+  const cart = useCart();
+
   const {
     data: product,
     isLoading,
@@ -72,6 +76,13 @@ export default function ProductPage() {
                 </ItemActions>
               </Item>
             </div>
+
+            <Button
+              className="w-full rounded-full"
+              onClick={() => cart.addItem(product)}
+            >
+              Add to Cart
+            </Button>
           </div>
         </div>
       </Container>

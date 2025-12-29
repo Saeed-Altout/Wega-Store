@@ -1,9 +1,12 @@
+import { Suspense } from "react";
 import { ProductsSection } from "./_components/products";
 
 export default function ProductsPage() {
   return (
     <div>
-      <ProductsSection />
+      <Suspense>
+        <ProductsSection />
+      </Suspense>
     </div>
   );
 }

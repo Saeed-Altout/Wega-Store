@@ -1,13 +1,11 @@
-import { Product } from "@/lib/generated/client";
-
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 
-import { getProducts } from "@/services/products/api";
+import { getProducts } from "@/services/products/server";
 import { ProductsList } from "@/components/products-list";
 
 export async function ProductsSection() {
-  const products: Product[] = await getProducts();
+  const products = await getProducts();
 
   return (
     <section>

@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-import { getProducts } from "@/services/products/api";
+import { getProducts } from "@/services/products/server";
 
 import { ProductsClientPage } from "./_components/client";
 

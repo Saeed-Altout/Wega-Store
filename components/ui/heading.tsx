@@ -8,7 +8,7 @@ export function Heading({
   ...props
 }: React.ComponentProps<"div"> & {
   title: string;
-  description: string;
+  description?: string;
 }) {
   return (
     <div
@@ -20,7 +20,9 @@ export function Heading({
     >
       <div className="flex flex-col">
         <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
-        <p className="text-muted-foreground max-w-2xl">{description}</p>
+        {description && (
+          <p className="text-muted-foreground max-w-2xl">{description}</p>
+        )}
       </div>
       {children}
     </div>

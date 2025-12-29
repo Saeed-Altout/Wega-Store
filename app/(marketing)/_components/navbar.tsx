@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { MenuIcon, ShoppingCartIcon, StoreIcon } from "lucide-react";
+import {
+  MenuIcon,
+  SearchIcon,
+  ShoppingCartIcon,
+  StoreIcon,
+} from "lucide-react";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useCart } from "@/hooks/use-cart";
@@ -23,17 +28,22 @@ import {
 } from "@/components/ui/sheet";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { Kbd } from "@/components/ui/kbd";
+import { useSearchStore } from "@/hooks/use-search-store";
 
 export function Navbar() {
   const isMobile = useIsMobile();
   const cart = useCart();
+  const search = useSearchStore();
 
   return (
     <Container className="flex items-center justify-between">
       <NavigationMenu viewport={isMobile}>
         <Link href="/" className="flex items-center gap-2 mr-4">
           <StoreIcon className="size-8" />
-          <span className="text-xl font-semibold">Wega Store</span>
+          <span className="text-xl font-semibold hidden md:block">
+            Wega Store
+          </span>
         </Link>
         <NavigationMenuList className="flex-wrap hidden md:flex">
           <NavigationMenuItem>
@@ -56,6 +66,11 @@ export function Navbar() {
       </NavigationMenu>
 
       <div className="flex justify-end gap-4">
+        <Button variant="outline" onClick={() => search.toggle()}>
+          <SearchIcon />
+          Search products...
+          <Kbd className="ml-auto">⌘ K</Kbd>
+        </Button>
         <Button className="rounded-full" onClick={() => cart.onOpen()}>
           <ShoppingCartIcon /> {cart.items.length}
         </Button>

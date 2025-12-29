@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-query";
 import { getProducts } from "@/services/products/api";
 import { PreviewSheet } from "@/components/sheets/preview-sheet";
+import { SearchCommand } from "@/components/search-command";
 
 export default async function MarketingLayout({
   children,
@@ -29,6 +30,7 @@ export default async function MarketingLayout({
       <Footer />
 
       <PreviewSheet />
+      <SearchCommand />
     </HydrationBoundary>
   );
 }

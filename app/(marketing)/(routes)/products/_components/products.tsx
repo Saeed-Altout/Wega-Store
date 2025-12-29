@@ -1,11 +1,21 @@
+"use client";
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
+import { Spinner } from "@/components/ui/spinner";
 
-import { getProducts } from "@/services/products/server";
 import { ProductsList } from "@/components/products-list";
+import { useGetProductsQuery } from "@/services/products/queries";
 
-export async function ProductsSection() {
-  const products = await getProducts();
+export function ProductsSection() {
+  const { data: products, isLoading } = useGetProductsQuery();
+
+  if (isLoading) {
+    return (
+      <div className="h-[600px] flex justify-center items-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <section>

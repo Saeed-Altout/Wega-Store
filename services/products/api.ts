@@ -2,15 +2,10 @@ import { z } from "zod";
 import axios from "axios";
 import { productSchema } from "@/schemas/product-schema";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
 export const getProducts = async () => {
   try {
-    const response = await fetch(`${baseUrl}/api/products`, {
-      method: "GET",
-    });
-    const data = await response.json();
-    return data;
+    const response = await axios.get("/api/products");
+    return response.data;
   } catch (error) {
     throw error;
   }
@@ -18,11 +13,8 @@ export const getProducts = async () => {
 
 export const getProduct = async (productId: string) => {
   try {
-    const response = await fetch(`${baseUrl}/api/products/${productId}`, {
-      method: "GET",
-    });
-    const data = await response.json();
-    return data;
+    const response = await axios.get(`/api/products/${productId}`);
+    return response.data;
   } catch (error) {
     throw error;
   }

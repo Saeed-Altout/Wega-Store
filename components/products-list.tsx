@@ -93,7 +93,7 @@ export function ProductsList({ products }: { products: Product[] }) {
       </div>
       <div className="mt-10 space-y-5">
         {filteredProducts.length === 0 && (
-          <div className="flex justify-center items-center">
+          <div className="h-[300px] flex justify-center items-center">
             <p className="text-center text-muted-foreground">
               <Button variant="outline" onClick={onClear}>
                 Clear Filter

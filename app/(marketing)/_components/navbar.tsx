@@ -112,6 +112,11 @@ export function Navbar() {
                     <Link href="/products">Products</Link>
                   </Button>
                 </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Button variant="link" asChild>
+                    <Link href="/cart">Cart</Link>
+                  </Button>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </SheetContent>

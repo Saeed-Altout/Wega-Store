@@ -27,7 +27,7 @@ export function ProductsSection() {
   );
 
   return (
-    <section>
+    <section className="pt-10" id="products-section">
       <Container>
         <div className="py-10">
           <Heading

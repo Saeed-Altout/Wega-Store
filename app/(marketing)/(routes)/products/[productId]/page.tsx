@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import {
@@ -17,9 +17,11 @@ import { Button } from "@/components/ui/button";
 
 import { useGetProductQuery } from "@/services/products/queries";
 import { useCart } from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const cart = useCart();
 
   const {
@@ -49,7 +51,11 @@ export default function ProductPage() {
             <Image
               src={product.imageUrl}
               alt={`product-${product.title}`}
-              className="absolute inset-0 h-full w-full object-cover"
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover opacity-0 scale-95 transition-all blur-lg",
+                isLoaded && "opacity-100 scale-100 blur-none"
+              )}
+              onLoadingComplete={() => setIsLoaded(true)}
               fill
             />
           </div>

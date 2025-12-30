@@ -4,5 +4,10 @@ export function Container({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  return <div className={cn("mx-auto max-w-7xl px-4", className)} {...props} />;
+  return (
+    <div
+      className={cn("px-4 md:px-6 lg:px-8 xl:px-10", className)}
+      {...props}
+    />
+  );
 }

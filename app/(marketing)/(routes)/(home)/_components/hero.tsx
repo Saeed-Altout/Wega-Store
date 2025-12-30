@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
-    <section id="hero-section">
+    <section id="hero-section" className="pt-5">
       <Container>
         <div className="h-[600px] flex flex-col md:flex-row gap-6 justify-between py-10">
           <div className="h-full max-w-lg flex flex-col gap-2 md:gap-4 justify-center items-start">

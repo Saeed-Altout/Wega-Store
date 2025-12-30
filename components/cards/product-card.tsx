@@ -1,7 +1,7 @@
 "use client";
 
 import ImageNext from "next/image";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ShoppingCartIcon } from "lucide-react";
 
@@ -17,9 +17,11 @@ import { Currency } from "@/components/ui/currency";
 
 import { Product } from "@/lib/generated/client";
 import { useCart } from "@/hooks/use-cart";
+import { cn } from "@/lib/utils";
 
 export function ProductCard({ product }: { product: Product }) {
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const cart = useCart();
 
@@ -39,7 +41,11 @@ export function ProductCard({ product }: { product: Product }) {
           fill
           src={product?.imageUrl}
           alt={`product-${product.title}`}
-          className="aspect-square rounded-xl object-cover"
+          className={cn(
+            "aspect-square rounded-xl object-cover opacity-0 scale-95 transition-all blur-lg",
+            isLoaded && "opacity-100 scale-100 blur-none"
+          )}
+          onLoadingComplete={() => setIsLoaded(true)}
         />
         <div className="absolute bottom-5 w-full md:opacity-0 opacity-100 transition group-hover:opacity-100">
           <div className="flex justify-center gap-x-6">
@@ -50,11 +56,9 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         </div>
       </div>
-      <CardHeader className="gap-0 p-2 h-[80px]">
-        <CardTitle className="text-xl">{product.title}</CardTitle>
-        <CardDescription className="line-clamp-2">
-          {product.description}
-        </CardDescription>
+      <CardHeader className="gap-1 p-2">
+        <CardTitle className="line-clamp-1">{product.title}</CardTitle>
+        <CardDescription>{product.category}</CardDescription>
       </CardHeader>
       <CardFooter className="p-2">
         <Currency value={+product?.price} />

@@ -7,9 +7,9 @@ import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
 
-import { ProductsList } from "@/components/products-list";
 import { useGetProductsQuery } from "@/services/products/queries";
 import { Product } from "@/lib/generated/client";
+import { ProductsSection as Products } from "@/components/sections/products-section";
 
 export function ProductsSection() {
   const { data: products, isLoading } = useGetProductsQuery();
@@ -27,23 +27,18 @@ export function ProductsSection() {
   );
 
   return (
-    <section className="pt-10" id="products-section">
-      <Container>
-        <div className="py-10">
-          <Heading
-            title="Products"
-            description="Explore our featured collection"
-          >
-            <Button variant="link" asChild>
-              <Link href="/products">
-                More
-                <ArrowRightIcon />
-              </Link>
-            </Button>
-          </Heading>
+    <section className="py-10" id="products-section">
+      <Container className="space-y-4">
+        <Heading title="Products" description="Explore our featured collection">
+          <Button variant="link" asChild>
+            <Link href="/products">
+              More
+              <ArrowRightIcon />
+            </Link>
+          </Button>
+        </Heading>
 
-          <ProductsList products={featuredProducts} />
-        </div>
+        <Products products={featuredProducts} />
       </Container>
     </section>
   );

@@ -1,9 +1,9 @@
 "use client";
-import { Container } from "@/components/ui/container";
-import { Heading } from "@/components/ui/heading";
-import { Spinner } from "@/components/ui/spinner";
 
-import { ProductsList } from "@/components/products-list";
+import { Container } from "@/components/ui/container";
+import { Spinner } from "@/components/ui/spinner";
+import { ProductsSection as Products } from "@/components/sections/products-section";
+
 import { useGetProductsQuery } from "@/services/products/queries";
 
 export function ProductsSection() {
@@ -18,12 +18,9 @@ export function ProductsSection() {
   }
 
   return (
-    <section>
+    <section className="py-10" id="products-section">
       <Container>
-        <div className="py-10">
-          <Heading title="Products" description="Explore our collection" />
-          <ProductsList products={products} />
-        </div>
+        <Products products={products} />
       </Container>
     </section>
   );

@@ -30,11 +30,13 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { useSearchStore } from "@/hooks/use-search-store";
+import { useAuth, UserButton } from "@clerk/nextjs";
 
 export function Navbar() {
   const isMobile = useIsMobile();
   const cart = useCart();
   const search = useSearchStore();
+  const { isSignedIn } = useAuth();
 
   return (
     <Container className="flex items-center justify-between">
@@ -82,6 +84,13 @@ export function Navbar() {
         <Button className="rounded-full" onClick={() => cart.onOpen()}>
           <ShoppingCartIcon /> {cart.items.length}
         </Button>
+        {isSignedIn ? (
+          <UserButton />
+        ) : (
+          <Button asChild variant="default">
+            <Link href="/sign-in">Sign In</Link>
+          </Button>
+        )}
 
         <Sheet>
           <SheetTrigger asChild>

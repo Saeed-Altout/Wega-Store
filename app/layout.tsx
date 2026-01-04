@@ -40,7 +40,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{
+      layout: {
+        unsafe_disableDevelopmentModeWarnings: process.env.NODE_ENV !== 'production',
+      },
+    }}>
       <html lang="en" suppressHydrationWarning>
         <body className={cn(poppins.className, "antialiased")}>
           <QueryProvider>
